@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1660919103632" clover="3.2.0">
-  <project timestamp="1660919103632" name="All files">
+<coverage generated="1660919144130" clover="3.2.0">
+  <project timestamp="1660919144130" name="All files">
     <metrics statements="29" coveredstatements="29" conditionals="13" coveredconditionals="13" methods="9" coveredmethods="9" elements="51" coveredelements="51" complexity="0" loc="29" ncloc="29" packages="1" files="1" classes="1"/>
     <file name="index.ts" path="/Users/isaacyoung/SourceTree/ts-lateinit/index.ts">
       <metrics statements="29" coveredstatements="29" conditionals="13" coveredconditionals="13" methods="9" coveredmethods="9"/>

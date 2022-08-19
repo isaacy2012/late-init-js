@@ -1,7 +1,7 @@
 import {
     ReadonlyLateinitAlreadyInitializedException,
     LateinitNotInitializedException,
-    readonlyLateinit, lateinit, isInitialized
+    readonlyLateinit, isInitialized
 } from "../index";
 
 

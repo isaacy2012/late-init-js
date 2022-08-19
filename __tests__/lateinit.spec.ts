@@ -2,8 +2,6 @@ import {
     isInitialized,
     lateinit,
     LateinitNotInitializedException,
-    readonlyLateinit,
-    ReadonlyLateinitAlreadyInitializedException
 } from "../index";
 
 describe("Lateinit", () => {
