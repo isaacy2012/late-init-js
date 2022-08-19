@@ -1,0 +1,40 @@
+{
+  "name": "ts-lateinit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isaacy2012/ts-lateinit.git"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "testMatch": [
+      "**/*.spec.ts"
+    ],
+    "coverageDirectory": ".coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isaacy2012/ts-lateinit/issues"
+  },
+  "homepage": "https://github.com/isaacy2012/ts-lateinit#readme",
+  "devDependencies": {
+    "@types/jest": "^23.3.0",
+    "typescript": "^4.7.4",
+    "ts-jest": "^28.0.0"
+  }
+}
