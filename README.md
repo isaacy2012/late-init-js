@@ -17,17 +17,21 @@ npm install ts-lateinit
 
 TypeScript needs to run with the `experimentalDecorators` option enabled.
 
-You must use the [definite assignment assertion](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#strict-class-initialization):
+You must use the [definite assignment assertion](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#strict-class-initialization)
+if the property type is not optional (i.e not `T | undefined`):
 ```typescript
 class Person {
   @lateinit()
   name!: string;
   //  ^ definite assignment assertion
+    
+  @lateinit()
+  nullableName: string | undefined;
+  //  no definite assignment required
 }
 ```
 
 ### Mutable `@lateinit` Property
-
 
 ```typescript
 import { lateinit } from "ts-lateinit"
@@ -47,12 +51,50 @@ const anotherPerson = new Person();
 console.log(anotherPerson.name); // throws a LateinitNotInitializedException
 ```
 
+### Immutable `@readonlyLateinit` Property
+
+```typescript
+import { readonlyLateinit } from "ts-lateinit"
+
+class Person {
+    @readonlyLateinit()
+    name!: string;
+}
+
+const person = new Person();
+person.name = "Alice";
+console.log(person.name); // prints "Alice"
+person.name = "Bob"; // throws a ReadonlyLateinitAlreadyInitializedException
+```
+
+### Ignoring initial set to `undefined`
+
+`@lateinit` and `@readonlyLateInit` accept an optional parameter `options` for which if `ignoreInitialUndefined` is `true`,
+ts-lateinit will ignore the first "set" action on the property if it is `undefined`. 
+
+This can be helpful when using reflection to instantiate a class, for example when using serialization/deserialization
+libraries such as [TypedJson](https://www.npmjs.com/package/typedjson).
+
+```typescript
+import { readonlyLateinit } from "ts-lateinit"
+
+class Person {
+    @readonlyLateinit({ ignoreInitialUndefined: true })
+    name!: string;
+}
+
+const person = new Person();
+person.name = "Alice";
+console.log(person.name); // prints "Alice"
+person.name = "Bob"; // throws a ReadonlyLateinitAlreadyInitializedException
+```
+
 ### Checking if a Property Has Been Initialized
 
 To check whether the property has been initialized, use the `isInitialized(thisRef: any, propertyKey: string)` function.
 
 ```typescript
-import { lateinit, isInitialized } from "ts-lateinit"
+import { readonlyLateinit, isInitialized } from "ts-lateinit"
 
 class Person {
     @readonlyLateinit()
