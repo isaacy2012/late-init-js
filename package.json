@@ -1,6 +1,6 @@
 {
-  "name": "ts-lateinit",
-  "version": "1.0.169",
+  "name": "late-init",
+  "version": "0.0.9",
   "description": "Late initialization decorator for TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/isaacy2012/ts-lateinit.git"
+    "url": "git+https://github.com/isaacy2012/late-init-ts.git"
   },
   "jest": {
     "testEnvironment": "node",
@@ -35,9 +35,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/isaacy2012/ts-lateinit/issues"
+    "url": "https://github.com/isaacy2012/late-init-ts/issues"
   },
-  "homepage": "https://github.com/isaacy2012/ts-lateinit#readme",
+  "homepage": "https://github.com/isaacy2012/late-init-ts#readme",
   "devDependencies": {
     "@types/jest": "^23.3.0",
     "typescript": "^4.7.4",

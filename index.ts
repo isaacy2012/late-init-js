@@ -12,8 +12,8 @@ export class ReadonlyLateinitAlreadyInitializedException extends Error {
     }
 }
 
-const SET = "__ts-lateinit_SET__";
-const VAL = "__ts-lateinit_VAL__";
+const SET = "__late-init_SET__";
+const VAL = "__late-init_VAL__";
 
 export interface LateinitOptions {
     /**
@@ -67,7 +67,7 @@ export function readonlyLateinit(options?: LateinitOptions) {
 /**
  * Check whether a given property is initialized.
  * Returns true iff the property was set using the setter.
- * Returns false if the property was never set, or if this is not a ts-lateinit property
+ * Returns false if the property was never set, or if this is not a late-init property
  * @param thisRef the object that may or may not have the property
  * @param propertyKey the key for the property
  */
