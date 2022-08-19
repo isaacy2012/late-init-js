@@ -1,4 +1,4 @@
-import { lateinit, LateinitNotInitializedException } from "../src/lateinit";
+import { lateinit, LateinitNotInitializedException } from "../index";
 
 describe("Lateinit", () => {
     it("should throw an error when it is uninitialized", () => {

@@ -1,10 +1,11 @@
 {
   "name": "ts-lateinit",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.13",
+  "description": "Late initialization decorator for TypeScript",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "publish": "npm publish"
   },
   "repository": {
     "type": "git",

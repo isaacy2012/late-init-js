@@ -2,7 +2,7 @@ import {
     ReadonlyLateinitAlreadyInitializedException,
     LateinitNotInitializedException,
     readonlyLateinit
-} from "../src/lateinit";
+} from "../index";
 
 
 describe("Readonly Lateinit", () => {
