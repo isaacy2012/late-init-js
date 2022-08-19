@@ -1,0 +1,10 @@
+bin
+node_modules
+packages
+coverage
+/lib
+Properties
+temp
+.eslintcache
+.idea
+*.iml
