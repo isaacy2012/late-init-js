@@ -1,42 +1,36 @@
-export class LateinitNotInitializedException extends Error {
-    constructor(message: string) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isInitialized = exports.readonlyLateinit = exports.lateinit = exports.ReadonlyLateinitAlreadyInitializedException = exports.LateinitNotInitializedException = void 0;
+class LateinitNotInitializedException extends Error {
+    constructor(message) {
         super(message);
         this.name = new.target.name;
     }
 }
-
-export class ReadonlyLateinitAlreadyInitializedException extends Error {
-    constructor(message: string) {
+exports.LateinitNotInitializedException = LateinitNotInitializedException;
+class ReadonlyLateinitAlreadyInitializedException extends Error {
+    constructor(message) {
         super(message);
         this.name = new.target.name;
     }
 }
-
+exports.ReadonlyLateinitAlreadyInitializedException = ReadonlyLateinitAlreadyInitializedException;
 const SET = "__ts-lateinit_SET__";
 const VAL = "__ts-lateinit_VAL__";
-
-export interface LateinitOptions {
-    /**
-     * If this is a readonly option, ignore the first 'set' action if the value to set was undefined.
-     * This can be helpful when using reflection to instantiate a class.
-     */
-    ignoreInitialUndefined: boolean
-}
-
-function _lateinit<T>(isReadonly: boolean, options?: LateinitOptions) {
-    return function<T>(proto: Object, propertyKey: string) {
-        const getter = function(this: T) {
-            if (!this[SET + propertyKey as keyof T]) {
+function _lateinit(isReadonly, options) {
+    return function (proto, propertyKey) {
+        const getter = function () {
+            if (!this[SET + propertyKey]) {
                 throw new LateinitNotInitializedException(`The property ${propertyKey} was not set!`);
             }
-            return this[VAL + propertyKey as keyof T];
-        }
-        const setter = function(this: T, newVal: T) {
-            if (isReadonly && this[SET + propertyKey as keyof T]) {
+            return this[VAL + propertyKey];
+        };
+        const setter = function (newVal) {
+            if (isReadonly && this[SET + propertyKey]) {
                 throw new ReadonlyLateinitAlreadyInitializedException(`The property ${propertyKey} was already \
 set, and readonly lateinit properties cannot be set twice!`);
             }
-            if (options?.ignoreInitialUndefined === true && newVal === undefined) {
+            if ((options === null || options === void 0 ? void 0 : options.ignoreInitialUndefined) === true && newVal === undefined) {
                 return;
             }
             Object.defineProperty(this, VAL + propertyKey, {
@@ -47,23 +41,21 @@ set, and readonly lateinit properties cannot be set twice!`);
                 writable: false,
                 value: true
             });
-        }
-
+        };
         Object.defineProperty(proto, propertyKey, {
             get: getter,
             set: setter
         });
-    }
+    };
 }
-
-export function lateinit(options?: LateinitOptions) {
+function lateinit(options) {
     return _lateinit(false, options);
 }
-
-export function readonlyLateinit(options?: LateinitOptions) {
+exports.lateinit = lateinit;
+function readonlyLateinit(options) {
     return _lateinit(true, options);
 }
-
+exports.readonlyLateinit = readonlyLateinit;
 /**
  * Check whether a given property is initialized.
  * Returns true iff the property was set using the setter.
@@ -71,6 +63,7 @@ export function readonlyLateinit(options?: LateinitOptions) {
  * @param thisRef the object that may or may not have the property
  * @param propertyKey the key for the property
  */
-export function isInitialized(thisRef: any, propertyKey: string): boolean {
+function isInitialized(thisRef, propertyKey) {
     return thisRef[SET + propertyKey] === true;
 }
+exports.isInitialized = isInitialized;

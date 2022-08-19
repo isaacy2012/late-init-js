@@ -13,7 +13,7 @@ TypedJSON is available from npm:
 npm install ts-lateinit
 ```
 
-## How to use
+## How to Use
 
 TypeScript needs to run with the `experimentalDecorators` option enabled.
 
@@ -28,7 +28,6 @@ class Person {
 
 ### Mutable `@lateinit` Property
 
-The following example demonstrates how to annotate a basic, non-nested class for serialization, and how to serialize to JSON and back:
 
 ```typescript
 import { lateinit } from "ts-lateinit"
@@ -48,12 +47,12 @@ const anotherPerson = new Person();
 console.log(anotherPerson.name); // throws a LateinitNotInitializedException
 ```
 
-### Immutable `@readonlyLateinit` Property
+### Checking if a Property Has Been Initialized
 
-The following example demonstrates how to annotate a basic, non-nested class for serialization, and how to serialize to JSON and back:
+To check whether the property has been initialized, use the `isInitialized(thisRef: any, propertyKey: string)` function.
 
 ```typescript
-import { lateinit } from "ts-lateinit"
+import { lateinit, isInitialized } from "ts-lateinit"
 
 class Person {
     @readonlyLateinit()
@@ -61,10 +60,22 @@ class Person {
 }
 
 const person = new Person();
+console.log(isInitialized(person, "name")); // prints "false"
 person.name = "Alice";
-console.log(person.name); // prints "Alice"
-person.name = "Bob"; // throws a ReadonlyLateinitAlreadyInitializedException
+console.log(isInitialized(person, "name")); // prints "true"
 ```
+
+However, if you find you are using `isInitialized` a lot, you may wish to consider using a optional type instead 
+to take advantage of TypeScripts optional chaining features such as `?` and `??`.
+
+## Notes
+ts-lateinit adds two extra properties for each property that is defined as lateinit, prefixed with `__ts-lateinit_SET__` 
+and `__ts-lateinit_VAL__`, to keep track of whether the property was set and the value respectively. 
+
+For example, for the above example with the property `name`, the two extra properties would be `__ts-lateinit_SET__name` 
+and `__ts-lateinit_VAL__name`
+
+Ensure that these properties are not overwritten. 
 
 ## License
 

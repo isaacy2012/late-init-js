@@ -1,12 +1,17 @@
 {
   "name": "ts-lateinit",
-  "version": "1.0.13",
+  "version": "1.0.167",
   "description": "Late initialization decorator for TypeScript",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "rm -rf dist/ && tsc --outDir dist/",
     "test": "jest --coverage",
-    "publish": "npm publish"
+    "deploy": "npm run test && npm run build && npm publish"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/isaacy2012/ts-lateinit.git"

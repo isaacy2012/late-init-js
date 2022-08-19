@@ -1,7 +1,7 @@
 import {
     ReadonlyLateinitAlreadyInitializedException,
     LateinitNotInitializedException,
-    readonlyLateinit
+    readonlyLateinit, lateinit, isInitialized
 } from "../index";
 
 
@@ -17,6 +17,33 @@ describe("Readonly Lateinit", () => {
             console.log(testObject1.theProperty);
         }).toThrow(LateinitNotInitializedException);
     });
+
+    it("should be able to check if property has been initialized yet when it has not been", () => {
+        class TestClass {
+            @readonlyLateinit()
+            theProperty!: string;
+        }
+
+        const testObject1 = new TestClass();
+        expect(isInitialized(testObject1, "theProperty")).toBe(false);
+        expect(() => {
+            console.log(testObject1.theProperty);
+        }).toThrow(LateinitNotInitializedException);
+    });
+
+    it("should be able to check if property has been initialized yet when it has been", () => {
+        class TestClass {
+            @readonlyLateinit()
+            theProperty!: string;
+        }
+
+        const testObject1 = new TestClass();
+        const testString = "testString";
+        testObject1.theProperty = testString;
+        expect(isInitialized(testObject1, "theProperty")).toBe(true);
+        expect(testObject1.theProperty).toBe(testString);
+    });
+
 
     it("should retain set value", () => {
         class TestClass {
@@ -93,6 +120,40 @@ describe("Readonly Lateinit", () => {
 
         expect(() => {
             testObject1.theProperty = new PropertyObject(3);
+        }).toThrow(ReadonlyLateinitAlreadyInitializedException);
+    });
+
+    it("ignores first undefined initialization if parameter is set", () => {
+        class TestClass {
+            @readonlyLateinit({ ignoreInitialUndefined: true })
+            theProperty!: string;
+        }
+
+        const testObject1 = new TestClass();
+        // @ts-ignore
+        testObject1.theProperty = undefined;
+        expect(isInitialized(testObject1, "theProperty")).toBe(false);
+        expect(() => {
+            console.log(testObject1.theProperty);
+        }).toThrow(LateinitNotInitializedException);
+        const str = "string";
+        testObject1.theProperty = str;
+        expect(testObject1.theProperty).toBe(str);
+    });
+
+    it("does not ignore first undefined initialization if parameter is not set", () => {
+        class TestClass {
+            @readonlyLateinit()
+            theProperty!: string;
+        }
+
+        const testObject1 = new TestClass();
+        // @ts-ignore
+        testObject1.theProperty = undefined;
+        expect(isInitialized(testObject1, "theProperty")).toBe(true);
+        expect(testObject1.theProperty).toBeUndefined();
+        expect(() => {
+            testObject1.theProperty = "string";
         }).toThrow(ReadonlyLateinitAlreadyInitializedException);
     });
 
