@@ -1,8 +1,8 @@
 export declare class LateinitNotInitializedException extends Error {
-    constructor(message: string);
+    constructor(propertyKey: string);
 }
 export declare class ReadonlyLateinitAlreadyInitializedException extends Error {
-    constructor(message: string);
+    constructor(propertyKey: string);
 }
 export interface LateinitOptions {
     /**
@@ -16,7 +16,7 @@ export declare function readonlyLateinit(options?: LateinitOptions): <T>(proto: 
 /**
  * Check whether a given property is initialized.
  * Returns true iff the property was set using the setter.
- * Returns false if the property was never set, or if this is not a late-init property
+ * Returns false if the property was never set, or if this is not a late-init-js property
  * @param thisRef the object that may or may not have the property
  * @param propertyKey the key for the property
  */
