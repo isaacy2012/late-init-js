@@ -1,6 +1,6 @@
 {
   "name": "ts-lateinit",
-  "version": "1.0.168",
+  "version": "1.0.169",
   "description": "Late initialization decorator for TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

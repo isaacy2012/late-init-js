@@ -1,4 +1,4 @@
-[![npm version](https://img.shields.io/npm/v/ts-lateinit.svg?logo=npm&style=for-the-badge)](https://www.npmjs.com/package/typedjson)
+[![npm version](https://img.shields.io/npm/v/ts-lateinit.svg?logo=npm&style=for-the-badge)](https://www.npmjs.com/package/ts-lateinit)
 [![license](https://img.shields.io/npm/l/ts-lateinit?&style=for-the-badge&color=green)
 ](https://github.com/isaacy2012/ts-lateinit/blob/master/LICENSE)
 
