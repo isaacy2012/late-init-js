@@ -2,7 +2,7 @@
 [![license](https://img.shields.io/npm/l/late-init-js?&style=for-the-badge&color=green)
 ](https://github.com/isaacy2012/late-init-js/blob/master/LICENSE)
 
-Late initialization decorator for TypeScript. Comes with `@lateinit` and `@readonlyLateinit` variants for controlling 
+Late initialization decorators for TypeScript. Comes with `@lateinit` and `@readonlyLateinit` variants for controlling 
 the mutability of the property.
 
 ## Installation
